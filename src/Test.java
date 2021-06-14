@@ -571,6 +571,5 @@ class Test{
 
         System.out.print("Thanks for playing!\n");
     }
-
 }
 
