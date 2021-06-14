@@ -19,7 +19,9 @@ ___
 Elimination
 * Users test their knowledge of the menu and work to earn a score.
 * After every question, the user is shown the stats:
+
   ![](images/Stats.png)
+  
 * The game is finished when they have correctly identified each item on the menu one time each. Then, they are given a 
   score. 
 * Once a user correctly identifies an item, it is eliminated from the list of possible correct answers, hence the name
@@ -30,6 +32,7 @@ Free Play:
 
 By default, the user will be quizzed on the entire menu. If the user wants to focus on a particular item category, the 
 user can change the test to only involve a particular category.
+
 ![](images/PickCategory.png)
 
 ## Questions
