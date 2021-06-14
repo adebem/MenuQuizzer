@@ -2,7 +2,7 @@
 
 <p>Introducing: MenuQuizzer! The best way to learn the Boba Time Menu!<br></p>
 
-<p>NOTE: I do not own the Boba Time Menu</p>
+<p>NOTE: I do not own the Boba Time menu</p>
 
 ## Setup
 ___
