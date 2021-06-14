@@ -2,7 +2,7 @@
 
 <p>Introducing: MenuQuizzer! The best way to learn the Boba Time Menu!<br></p>
 
-<p>NOTE: I do not own the Boba Time menu</p>
+<p>NOTE: I do not own the Boba Time menu. This is only a fun personal side project meant to demonstrate my skills in the Java programming language.</p>
 
 ## Setup
 ___
