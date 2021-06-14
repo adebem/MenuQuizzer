@@ -51,13 +51,16 @@ Keyword Question:
 ## Tips
 ___
 Once you have "eliminated" an item, don't give it as an answer again! MenuQuizzer will remember!
+
 ![](images/AlreadyCorrect.png)
 
 Sometimes during 'Name That Item,' your guess may fit the prompt, but MenuQuizzer may have another item in mind:
+
 ![](images/NotQuiteCorrect.png)
 
 Many questions have multiple possible answers. If the first hint doesn't work, ask for another! There may be multiple 
-hints avaliable!
+hints avaliable! You won't get the same hint twice, though!
+
 ![](images/DifferentHints.png)
 
 
