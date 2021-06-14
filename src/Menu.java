@@ -12,7 +12,7 @@ class Menu {
 
     public Menu(String game_category) {
         try {
-            Scanner menu_text = new Scanner(new File("src/drinks.txt" ) );
+            Scanner menu_text = new Scanner(new File("drinks.txt" ) );
 
             String line = findFirstLine(game_category.toLowerCase(), menu_text);
 
@@ -102,7 +102,9 @@ class Menu {
         }
     }
 
-
+    // adds an item to the item list
+    // its categories to the category map
+    // its keywords to the keywords map
     void addItem(String name, String category, String k){
         List<String> keywords_list;
         category = category.strip().replace(" ", "_");
@@ -121,7 +123,9 @@ class Menu {
         items.add(new_item);
     }
 
-
+    // deletes an item to the item list
+    // its categories to the category map (if it's the last drink of its category)
+    // its keywords to the keywords map (if it's the last drink of with certain keyword)
     void deleteItem(Item d){
         if ( items.contains(d) ){
             items.remove(d);
@@ -135,6 +139,7 @@ class Menu {
                 categories.remove( category );
             }
 
+            // check the keywords in its keyword list
             for (String keyword : d.getKeywords() ) {
                 if (keywords.containsKey(keyword)){
                     keywords.get( keyword).remove(d);
@@ -145,6 +150,7 @@ class Menu {
                 }
             }
 
+            // check the keywords in its name
             String d_name = d.getName().strip().toLowerCase();
             String d_category = d.getCategory().strip().toLowerCase().replace("_", " ");
 
@@ -163,9 +169,7 @@ class Menu {
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             System.out.print("That item does not exist\n");
         }
     }

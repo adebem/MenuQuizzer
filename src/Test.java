@@ -29,6 +29,7 @@ class Test{
     }
 
 
+    // user picks the game mode and a menu is initialized
     void startGame() {
         String game_category = "All";
         String main_menu = format_line + "\n\nenter: Elimination\nf: Free Play\np: Pick Test Category\nq: Quit\n";
@@ -86,7 +87,7 @@ class Test{
         return categories[i];
     }
 
-
+    // asks questions until the user quits. Also lets the user restart the game.
     public void runTest() {
         if (!quit ) {
             while ( !quit & (test_menu.items.size() > 0) ) {
@@ -111,7 +112,7 @@ class Test{
         }
     }
 
-
+    // resets all of the game's stats if the user is sure
     public void restartGame() {
         System.out.print(format_line + "\nAre you sure you want to restart?\ny: yes, n: no\n\n");
         question_number -= 1;
@@ -158,12 +159,6 @@ class Test{
             multipleChoice();
         }
 
-     /* } else if (question_type == 1) {
-        categoryQuestion();
-     } else if (question_type == 2) {
-        keywordQuestion();
-     } */
-
         if (elimination & !restart) {
             String stats =  "%d Correct\n%d Incorrect\n%d To Go\n" + format_line + "\n";
             System.out.printf(stats, correct.size(), incorrect.size(), test_menu.items.size());
@@ -184,7 +179,7 @@ class Test{
         question_number += 1;
     }
 
-
+    // gives hints and asks for a specific item's name
     public void nameQuestion() {
         boolean right = false;
         Item correct_answer = findRandomItem(test_menu.items);
@@ -195,9 +190,7 @@ class Test{
 
         if (continueGame(user_answer)) {
             while ( !user_answer.equals("g") ) {
-           /* System.out.print("correct_answer.getName().toLowerCase(): " + correct_answer.getName().toLowerCase());
-           System.out.print("\n user_answer: " + user_answer);
-           System.out.print("\n perfect_match: " + perfect_match + "\n");*/
+
                 if (checkForMatch(correct_answer, user_answer)) {
                     System.out.print("\nCORRECT!\n");
                     correctAnswer(correct_answer);
@@ -253,7 +246,7 @@ class Test{
         return hint_string;
     }
 
-
+    // depending on the current question type, gives the keywords of the answer
     public String getKeywords(Item answer) {
 
         List<String> keyword_list = new ArrayList<>(answer.getKeywords());
@@ -287,7 +280,7 @@ class Test{
     }
 
 
-    // makes sure that the user has not  indicated that they no longer want to continue the test
+    // makes sure that the user has not indicated that they no longer want to continue the test
     public boolean continueGame(String input) {
         boolean continue_game = true;
 
@@ -311,7 +304,6 @@ class Test{
         return (perfect_match || near_match);
     }
 
-
     public boolean checkNearMatch(Item i, String user_answer) {
         if (question_type == 2) {
             return false;
@@ -321,12 +313,6 @@ class Test{
         int category_index = item_name.length();
         String category = i.getCategory().toLowerCase().strip().replace("_", " ");
         int category_length = category.length();
-
-        /*
-        System.out.print("item_name: [" + item_name + "] \n");
-        System.out.print("category: [" + category + "] \n\n");
-        System.out.print("item_name.contains(category): [" + item_name.contains(category) + "] \n\n");
-        */
 
         if (item_name.contains(category)) {
             int potential_index = (item_name.length() - category_length);
@@ -338,33 +324,23 @@ class Test{
 
         String w_o_category = item_name.substring(0, category_index).strip();
 
-        /*
-        if (!(correct.contains(i))) {
-            System.out.print("w_o_category: [" + w_o_category + "] \n");
-            System.out.print("user_answer: [" + user_answer + "] \n\n");
-        }
-        */
-
         return (w_o_category.equals(user_answer));
 
     }
 
 
     public void correctAnswer(Item correct_answer) {
-        if (elimination)
-        {
+        if (elimination) {
             updateStats(true, correct_answer);
             test_menu.deleteItem(correct_answer);
         }
     }
 
     public void incorrectAnswer(Item correct_answer) {
-        if (elimination)
-        {
+        if (elimination) {
             updateStats(false, correct_answer);
         }
     }
-
 
     public void updateStats(boolean right, Item correct_answer) {
         if (right) {
@@ -385,10 +361,6 @@ class Test{
     public String wrongAnswerPrompt(String user_answer, String prompt_str) {
 
         for ( Item given_answer : correct ) {
-        /*
-        System.out.print("\n given_answer.getName().toLowerCase(): " + given_answer.getName().toLowerCase());
-        System.out.printf("\n boolean perfect_match: %b\n" + perfect_match);
-        System.out.printf("\n near_match: %b\n" + near_match + "\n\n"); */
 
             if (checkForMatch(given_answer, user_answer)) {
                 return "You already got that one correct! Think of something else!\nAnswer (Give up: g): ";
@@ -407,7 +379,6 @@ class Test{
         return "Wrong Answer. Try Again (Give up: g): ";
     }
 
-
     public void multipleChoice() {
         Map< String, List<Item> > map;
 
@@ -423,7 +394,6 @@ class Test{
         getAnswers(num_questions, map);
     }
 
-
     public String getRandomKey( Map< String, List<Item> > map) {
         List<String> keys = new ArrayList<>( map.keySet() );
         Random r = new Random();
@@ -432,15 +402,13 @@ class Test{
         return keys.get(index);
     }
 
-
     public int multipleChoicePrompt(Map< String, List<Item> > map) {
-        /* System.out.print("\nCategory Question!\n"); */
 
         int quantity = getQuestionQuantity(map);
 
         key = key.replace("_", " ");
 
-        if (question_type == 1) {
+        if (question_type == 1) { // category question
             if (quantity == 1) {
                 System.out.printf("Name 1 %s\n\n", key);
             } else {
@@ -456,7 +424,7 @@ class Test{
 
                 System.out.printf("Name %d %ss\n\n", quantity, temp_key);
             }
-        } else {
+        } else { // keywords question
             if (quantity == 1) {
                 System.out.printf("Name 1 item with the keyword \"%s\"\n\n", key);
             } else {
@@ -466,7 +434,6 @@ class Test{
 
         return quantity;
     }
-
 
     public int getQuestionQuantity(Map< String, List<Item> > map) {
         List<Item> possible_entries = map.get(key);
@@ -482,7 +449,6 @@ class Test{
         return quantity;
     }
 
-
     public void getAnswers(int num_answers, Map< String, List<Item> > map) {
 
         List<Item> correct_answers = map.get(key.replace(" ", "_"));
@@ -490,11 +456,11 @@ class Test{
         if (java.util.Objects.isNull(correct_answers)) {
             System.out.print("correct_answers IS NULL\n");
             System.out.print("map:\n");
+
             for (String s: map.keySet() ) {
                 System.out.printf("    %s\n", s);
             }
             System.out.printf("key: %s\n\n", key);
-
         }
 
         int counter = 1;
@@ -533,32 +499,10 @@ class Test{
 
                 user_answer = getInput();
 
-            } else {
+            } else { // the user doesn't need a hint
                 boolean correct = false;
 
-                    /*
-                    boolean contains_key = user_answer.toLowerCase().contains(key.toLowerCase());
-
-                    System.out.print("question_type: " + question_type + "\n");
-
-                    if (question_type == 2) {
-                        System.out.print("user_answer.toLowerCase(): " + user_answer.toLowerCase() + "\n");
-                        System.out.print("key.toLowerCase(): " + key.toLowerCase() + "\n");
-                        System.out.print("contains_key: " + contains_key + "\n");
-                        System.out.print("user_answer.toLowerCase(): " + user_answer.toLowerCase() + "\n");
-                        System.out.print("user_answer.toLowerCase(): " + user_answer.toLowerCase() + "\n");
-                    }
-
-
-
-                    if ( contains_key & (question_type == 2) ) { // if the drink entered contains the keyword
-                        correct = true;
-                    } else {
-
-                    }
-                    */
-
-                for (Item correct_answer : correct_answers) {
+                for (Item correct_answer : correct_answers) { // check if the user gave a correct answer
                     String correct_key = key.replace(" ", "_");
                     boolean same_category = (correct_key.equals(correct_answer.getCategory()));
                     boolean category_condition = ( (question_type == 2) || same_category );
@@ -611,13 +555,9 @@ class Test{
         }
     }
 
-    public boolean keyInName(String Name) {
-        return true;
-    }
-
     public void endGame() {
         question_number -= 1;
-        double score = ((new Double(correct_count)/ new Double(question_number)) * 100);
+        double score = ((Double.valueOf(correct_count)/ Double.valueOf(question_number)) * 100);
 
         System.out.print("Congratulations! You've won!\n");
         System.out.printf("You answered %d questions correctly out of %d.\n", correct_count, question_number);
