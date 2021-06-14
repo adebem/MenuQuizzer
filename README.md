@@ -2,6 +2,8 @@
 
 <p>Introducing: MenuQuizzer! The best way to learn the Boba Time Menu!<br></p>
 
+<p>NOTE: I do not own the Boba Time Menu</p>
+
 ## Setup
 ___
 1. Install Java
@@ -74,5 +76,3 @@ ___
 ## Support
 ___
 Any questions? Email me at anthonyleedebem@gmail.com
-
-## NOTE: I do not own the Boba Time Menu
